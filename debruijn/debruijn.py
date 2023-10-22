@@ -358,7 +358,7 @@ def solve_out_tips(graph, ending_nodes) :
                 weight_avg_list.append(path_average_weight(graph,path))
             if len(list_successor) > 1 :
                 for end in ending_nodes : 
-                    for path in nx.all_simple_paths(graph,node;end)
+                    for path in nx.all_simple_paths(graph,node,end) : 
                         path_list.append(path)
                     
                     
@@ -398,7 +398,7 @@ def get_sink_nodes(graph):
     return ending_nodes
 
 
-def get_contigs(graph, starting_nodes, ending_nodes) -> :
+def get_contigs(graph, starting_nodes, ending_nodes):
     """Extract the contigs from the graph
 
     :param graph: (nx.DiGraph) A directed graph object 
@@ -441,17 +441,17 @@ def draw_graph(graph: DiGraph, graphimg_file: Path) -> None: # pragma: no cover
     """                                   
     fig, ax = plt.subplots()
     elarge = [(u, v) for (u, v, d) in graph.edges(data=True) if d['weight'] > 3]
-    #print(elarge)
+    print(elarge)
     esmall = [(u, v) for (u, v, d) in graph.edges(data=True) if d['weight'] <= 3]
-    #print(elarge)
+    print(elarge)
     # Draw the graph with networkx
-    #pos=nx.spring_layout(graph)
+    pos=nx.spring_layout(graph)
     pos = nx.random_layout(graph)
     nx.draw_networkx_nodes(graph, pos, node_size=6)
     nx.draw_networkx_edges(graph, pos, edgelist=elarge, width=6)
     nx.draw_networkx_edges(graph, pos, edgelist=esmall, width=6, alpha=0.5, 
                            edge_color='b', style='dashed')
-    #nx.draw_networkx(graph, pos, node_size=10, with_labels=False)
+    nx.draw_networkx(graph, pos, node_size=10, with_labels=False)
     # save image
     plt.savefig(graphimg_file.resolve())
 
@@ -459,7 +459,7 @@ def draw_graph(graph: DiGraph, graphimg_file: Path) -> None: # pragma: no cover
 #==============================================================
 # Main program
 #==============================================================
-def main() # pragma: no cover
+def main() :
     """
     Main program function
     """
